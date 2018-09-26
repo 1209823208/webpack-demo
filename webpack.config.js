@@ -5,17 +5,34 @@ const webpack = require('webpack'); // 用于访问内置插件
 module.exports={
     entry:{
         app:'./src/script/index.js',
-        search:'./src/script/demo.js'
+        search:'./src/script/demo.js',
+        a:'./src/script/a.js',
+        b:'./src/script/b.js',
+        c:'./src/script/c.js',
     },
     output: {
         path: __dirname + '/dist',
         filename: 'js/[name].js'
       },
+    //   多文件入口
     plugins: [
         new HtmlWebpackPlugin({
-            filename:'index.html',
+            filename:'a-index.html',
             template: './index.html',
-            inject:'head'
+            inject:'head',
+            chunks:['app','a']
+        }),
+        new HtmlWebpackPlugin({
+            filename:'b-index.html',
+            template: './index.html',
+            inject:'head',
+            chunks:['app','b']
+        }),
+        new HtmlWebpackPlugin({
+            filename:'c-index.html',
+            template: './index.html',
+            inject:'head',
+            chunks:['app','c']
         })
       ]
 }
