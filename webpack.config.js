@@ -94,7 +94,20 @@ module.exports = {
                 exclude: path.resolve(__dirname, 'node_modules'),
                 include:path.resolve(__dirname, 'src'),
                 loader: "babel-loader"
-            }
+            },
+            {
+                test: /\.html$/,
+                use: [ "html-loader" ]
+            },
+            {
+                test: /\.(png|jpg|gif)$/,
+                use: [
+                  {
+                    loader: 'file-loader',
+                    options: {}
+                  }
+                ]
+              }
         ]
     },
     //   多文件入口
@@ -102,7 +115,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: './index.html',
-            inject: 'head',
+            inject: 'body'
         })
     ]
 }
